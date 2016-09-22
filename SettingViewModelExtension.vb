@@ -4,7 +4,7 @@ Module SettingViewModelExtension
     Sub LoadProperties(Of T)(Target As T)
         Dim sto = Windows.Storage.ApplicationData.Current.LocalSettings.Values
         For Each prop In GetType(T).GetRuntimeProperties
-            If sto.ContainsKey(prop.Name) Then
+            If sto.ContainsKey(prop.Name) AndAlso prop.CanWrite Then
                 prop.SetValue(Target, sto(prop.Name))
             End If
         Next
@@ -12,6 +12,7 @@ Module SettingViewModelExtension
     Sub SaveProperties(Of T)(Target As T)
         Dim sto = Windows.Storage.ApplicationData.Current.LocalSettings.Values
         For Each prop In GetType(T).GetRuntimeProperties
+            If Not prop.CanRead Then Continue For
             Dim gotv = prop.GetValue(Target)
             If gotv.GetType.ToString.Contains("CoreDispatcher") Then Continue For
             If sto.ContainsKey(prop.Name) Then

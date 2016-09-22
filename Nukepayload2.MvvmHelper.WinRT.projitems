@@ -9,7 +9,9 @@
     <Import_RootNamespace>Nukepayload2.MvvmHelper.WinRT</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AppCache.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)LazyProperty.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)SettingViewModelExtension.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)SingleInstance.vb" />
   </ItemGroup>
 </Project>
